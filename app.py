@@ -11,8 +11,8 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET", "dev-secret")
 
 # Load configuration from environment (with defaults from .env)
-TRANSCRIBE_API_URL = os.environ.get("TRANSCRIBE_API_URL", "http://192.168.22.141:9000")
-TRANSCRIBE_ENDPOINT = os.environ.get('TRANSCRIBE_ENDPOINT', '/transcribe')
+TRANSCRIBE_API_URL = os.environ.get("TRANSCRIBE_API_URL", "https://aivoice.sspu-opava.cz")
+TRANSCRIBE_ENDPOINT = os.environ.get('TRANSCRIBE_ENDPOINT', '/inference')
 MANUAL_URL = os.environ.get("TRANSCRIBE_API_MANUAL", "http://192.168.22.141:9010")
 UPLOAD_DIR = os.path.join(os.path.dirname(__file__), os.environ.get('UPLOAD_DIR', 'uploads'))
 # If KEEP_UPLOADS is true, uploaded files are kept after forwarding; otherwise they are removed

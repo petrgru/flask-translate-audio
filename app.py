@@ -1,19 +1,22 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask, request, render_template, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import requests
 
+# Load environment variables from .env file
+load_dotenv()
+
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET", "dev-secret")
 
-# Configure the transcription API URL via environment variable or default
-# Default points to the provided transcription server
-TRANSCRIBE_API_URL = os.environ.get("TRANSCRIBE_API_URL", "https://aivoice.sspu-opava.cz")
+# Load configuration from environment (with defaults from .env)
+TRANSCRIBE_API_URL = os.environ.get("TRANSCRIBE_API_URL", "http://192.168.22.141:9000")
+TRANSCRIBE_ENDPOINT = os.environ.get('TRANSCRIBE_ENDPOINT', '/transcribe')
 MANUAL_URL = os.environ.get("TRANSCRIBE_API_MANUAL", "http://192.168.22.141:9010")
-UPLOAD_DIR = os.environ.get('UPLOAD_DIR', os.path.join(os.path.dirname(__file__), 'uploads'))
+UPLOAD_DIR = os.path.join(os.path.dirname(__file__), os.environ.get('UPLOAD_DIR', 'uploads'))
 # If KEEP_UPLOADS is true, uploaded files are kept after forwarding; otherwise they are removed
-KEEP_UPLOADS = os.environ.get('KEEP_UPLOADS', '0') in ('1', 'true', 'True')
-TRANSCRIBE_ENDPOINT = os.environ.get('TRANSCRIBE_ENDPOINT', '/inference')
+KEEP_UPLOADS = os.environ.get('KEEP_UPLOADS', '0').lower() in ('1', 'true', 'yes')
 
 # ensure upload dir exists
 os.makedirs(UPLOAD_DIR, exist_ok=True)

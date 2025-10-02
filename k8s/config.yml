@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: audio-transcribe-config
 data:
-  TRANSCRIBE_API_URL: "http://192.168.22.141:9000"
-  TRANSCRIBE_ENDPOINT: "/transcribe"
+  TRANSCRIBE_API_URL: "https://aivoice.sspu-opava.cz"
+  TRANSCRIBE_ENDPOINT: "/inference"
   TRANSCRIBE_API_MANUAL: "http://192.168.22.141:9010"
 ---
 apiVersion: v1

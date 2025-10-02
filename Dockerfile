@@ -21,11 +21,11 @@ COPY . .
 
 # Create uploads directory and set permissions
 RUN mkdir -p uploads && \
-    chown -R nobody:nogroup uploads && \
-    chmod 755 uploads
+    chown -R 1000:1000 uploads && \
+    chmod 777 uploads
 
-# Switch to non-root user
-USER nobody
+# Switch to non-root user with UID 1000
+USER 1000
 
 # Expose the port the app runs on
 EXPOSE 5000
